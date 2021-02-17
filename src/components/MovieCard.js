@@ -15,6 +15,7 @@ class MovieCard extends React.Component {
 
 render () {  
     const {movie, isFavourite} = this.props;
+
   return (
     <div className="movie-card">
          <div className="left">
@@ -30,12 +31,12 @@ render () {
                 {
                   isFavourite 
                   ? <button className="unfavourite-btn" 
-                  onClick={this.handleUnFavouriteClick} >UnFavourite
-                  </button>
-
+                    onClick={this.handleUnFavouriteClick} >UnFavourite
+                    </button>
+                    
                   : <button className="favourite-btn" 
-                  onClick={this.handleFavouriteClick} >Favourite
-                  </button>
+                    onClick={this.handleFavouriteClick} >Favourite
+                    </button>
                 }
             </div>
          </div>      

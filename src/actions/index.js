@@ -26,7 +26,6 @@ export function removeFromFavourite (movie) {
         type: REMOVE_FROM_FAVOURITE,
         movie
     }
-
 }
 
 export function setShowFavourite (val) {
@@ -34,5 +33,4 @@ export function setShowFavourite (val) {
         type: SET_SHOW_FAVOURITE,
         val
     }
-
 }
