@@ -1,7 +1,11 @@
+import { combineReducers } from 'redux';
+
 import { ADD_MOVIES,
         ADD_FAVOURITE, 
         REMOVE_FROM_FAVOURITE,
         SET_SHOW_FAVOURITE,
+        ADD_SEARCH_RESULT,
+        ADD_MOVIE_TO_LIST,
         } 
      from '../actions';
 
@@ -9,6 +13,7 @@ const initialMoviesState = {
     list: [],
     favourites: [],
     showFavourites: false
+    
 };
 
 export function movies (state = initialMoviesState , action) {
@@ -43,6 +48,11 @@ export function movies (state = initialMoviesState , action) {
                 ...state,
                 showFavourites: action.val
             }
+        case ADD_MOVIE_TO_LIST:
+            return {
+                ...state,
+                list: [action.movie, ...state.list]
+            };
             
          default:
              return state;
@@ -51,22 +61,45 @@ export function movies (state = initialMoviesState , action) {
 }
 
 const initialSearchState = {
-    result: {}
+    result: {},
+    showSearchResults: false
 };
 
 export function search (state = initialSearchState, action) {
-    console.log('SEARCH REDUCER');
-    return state;
-}
+    switch (action.type) {
 
-const initialRootState = {
-    movie: initialMoviesState,
-    search: initialSearchState
-}
+        case ADD_SEARCH_RESULT:
+            return {
+                ...state,
+                result: action.movie,
+                showSearchResults: true
+            }
+        case ADD_MOVIE_TO_LIST:
+            return {
+                 ...state,
+                 showSearchResults: false
+            };
 
-export default function rootReducer (state = initialRootState, action) {
-    return {
-        movies: movies(state.movies, action),
-        search: search(state.search, action)
+         default:
+             return state;
     }
 }
+
+
+// const initialRootState = {
+//     movie: initialMoviesState,
+//     search: initialSearchState
+// }
+
+// export default function rootReducer (state = initialRootState, action) {
+//     return {
+//         movies: movies(state.movies, action),
+//         search: search(state.search, action)
+//     }
+// }
+
+
+export default combineReducers ({
+    movies,
+    search
+});
